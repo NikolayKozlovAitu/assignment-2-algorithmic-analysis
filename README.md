@@ -98,20 +98,35 @@ This project contains custom implementations and empirical benchmarks for three 
 
 ### Workload 1: Random Access
 ![Random Access Plot](results/plots/workload1_random_access.png)
-* **Discussion:** Dynamic Array exhibits steady $\Theta(1)$ performance, staying near zero execution time. Linked List scales linearly $\mathcal{O}(n)$, taking ~633 ms at $N=100,000$ due to pointer traversal overhead.
+* **Discussion:** Dynamic Array exhibits steady O(1) performance, staying near zero execution time. Linked List scales linearly O(N), taking ~633 ms at N=100,000 due to pointer traversal overhead.
 
 ### Workload 3: Insertions
 ![Insertions Plot](results/plots/workload3_insertions.png)
-* **Discussion:** Linked List excels at `Add(0)` in $\Theta(1)$ time by updating pointer references. However, at index $N/2$, Linked List degrades significantly ($\mathcal{O}(n)$) because it must traverse to the midpoint before inserting.
+* **Discussion:** Linked List excels at `Add(0)` in O(1) time by updating pointer references. However, at index N/2, Linked List degrades significantly (O(N)) because it must traverse to the midpoint before inserting.
 
 ### Workload 4: Min-Heap Performance
 ![MinHeap Plot](results/plots/workload4_minheap.png)
-* **Discussion:** Both `insert` and `extractMin` exhibit logarithmic scaling $\mathcal{O}(\log n)$, processing 100,000 elements efficiently in milliseconds.
+* **Discussion:** Both `insert` and `extractMin` exhibit logarithmic scaling O(log N), processing 100,000 elements efficiently in milliseconds.
 
 ---
 
-## 7. Design Recommendations
+## 7. Performance & Design Analysis (Q&A)
+
+1. **How does increasing N affect each workload?**
+    - For linear operations (Linked List `get`, `contains`, `Add(N/2)`), execution time scales proportionally with N.
+    - For logarithmic operations (Min-Heap), time increases subtly as tree depth grows ($\log_2 N$).
+    - For O(1) operations (Dynamic Array `get`), execution time remains nearly flat regardless of N.
+
+2. **Why do algorithms with the same Big-O complexity have different running times?**
+    - Big-O ignores constant factors and low-level system optimizations. For example, linear search in Dynamic Array is faster than in Linked List due to CPU cache locality (contiguous memory blocks vs scattered pointers).
+
+3. **How do constant factors and implementation details affect performance?**
+    - Pointer dereferencing in Linked Lists creates cache misses. Dynamic Arrays benefit from contiguous memory layout, enabling continuous CPU prefetching.
+
+---
+
+## 8. Design Recommendations
 
 1. **Use Dynamic Array when:** Frequent random access (`get(i)`) or appending elements at the end is required.
-2. **Use Linked List when:** High-frequency insertions/deletions occur at the head (`index = 0`).
-3. **Use Min-Heap when:** Implementing Priority Queues or needing constant-time access to the minimum element with fast logarithmic updates.
+2. **Use Linked List when:** High-frequency insertions/deletions occur strictly at the head (`index = 0`).
+3. **Use Min-Heap when:** Implementing Priority Queues or needing constant-time access to the minimum element with fast logarithmic updates.. **Use Min-Heap when:** Implementing Priority Queues or needing constant-time access to the minimum element with fast logarithmic updates.

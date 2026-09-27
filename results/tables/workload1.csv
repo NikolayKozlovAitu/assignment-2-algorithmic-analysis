@@ -1,0 +1,5 @@
+N,Dynamic_Array_Time_ms,Linked_List_Time_ms,Accesses_Count,Theoretical_Complexity_DA,Theoretical_Complexity_LL
+100,0.20,0.72,10000,O(1),O(N)
+1000,0.02,5.86,10000,O(1),O(N)
+10000,0.00,58.87,10000,O(1),O(N)
+100000,0.11,633.25,10000,O(1),O(N)

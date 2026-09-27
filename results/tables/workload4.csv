@@ -1,0 +1,5 @@
+N,Insert_Total_Time_ms,Extract_Total_Time_ms,Theoretical_Complexity_Per_Op
+100,0.04,0.07,O(log N)
+1000,0.05,0.10,O(log N)
+10000,1.16,0.62,O(log N)
+100000,1.37,6.27,O(log N)
